@@ -65,8 +65,8 @@ namespace HelloWorld
             string host;
             host = Dns.GetHostName();
             int port = 5000;
-            string request = "GET / HTTP/1.1\r\nHost: " + host + "\r\nConnection: Close\r\n\r\n";
-            Byte[] bytesSent = Encoding.ASCII.GetBytes(request);
+            string TextSend = "This is a simple test. \r\n\r\n";
+            Byte[] bytesSent = Encoding.ASCII.GetBytes(TextSend);
             Byte[] bytesReceived =new Byte[256];
             
             //Create a connection
@@ -80,7 +80,7 @@ namespace HelloWorld
             
             //Receive the server home page content
             int bytes = 0;
-            string page = "Default HTML page on " + host + ":\r\n";
+            string page = " \r\n";
             
             //The following will block until the page is transmitted
             do
