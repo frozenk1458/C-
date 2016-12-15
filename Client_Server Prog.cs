@@ -60,8 +60,8 @@ namespace HelloWorld
         }
         public String Sock()
         {
-            /*Initatialization Socket*/
-            
+            /*Initatialization Socket and variables*/
+       
             string host;
             host = Dns.GetHostName();
             int port = 5000;
@@ -72,25 +72,26 @@ namespace HelloWorld
             //Create a connection
             Socket s = ConnectSocket(host,port);
             
+            //Error message in case the socket is not open
             if (s == null)
                 return ("Connection failed");
                 
-            // Send request to the server
+            // Send text to the server
             s.Send(bytesSent,bytesSent.Length, 0);
             
-            //Receive the server home page content
+            //Receive the text 
             int bytes = 0;
-            string page = " \r\n";
+            string txt = " \r\n";
             
-            //The following will block until the page is transmitted
+            //The following will block until the text is transmitted
             do
             {
                 bytes = s.Receive(bytesReceived, bytesReceived.Length, 0);
-                page = page + Encoding.ASCII.GetString(bytesReceived, 0, bytes);
+                txt = txt + Encoding.ASCII.GetString(bytesReceived, 0, bytes);
             }
             while (bytes > 0);
             
-            return page;
+            return txt;
         }
     }
     
