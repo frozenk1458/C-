@@ -12,10 +12,12 @@ namespace QuickSharp
     {
         private static void Main()
         {
-            //Get the IP address and convert it to string
+            //Get the current host name from the system
             String strHostName = string.Empty;
             strHostName = Dns.GetHostName();
             IPHostEntry ipEntry = Dns.GetHostEntry(strHostName);
+            //Get a list of IP addresses. Currently I have 2 IP interfaces so I have 2 IP addresses.
+            //Here I have chosen to use the second. The index 0 of IP address tab is the 1st interface and the index 1 is the second interface and so on.
             IPAddress[] addr = ipEntry.AddressList;
             string ipAddress = addr[1].ToString();
             
