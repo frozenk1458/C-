@@ -6,7 +6,7 @@ using System.Threading;
 using System.IO;
 using System.Globalization;
 
-namespace QuickSharp
+namespace DefaultNamespace
 {
     public class Program
     {
