@@ -8,7 +8,7 @@ using System.Globalization;
 
 namespace DefaultNamespace
 {
-    public class MainClass
+    class MainClass
     {
         private static void Main()
         {
