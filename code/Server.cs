@@ -17,7 +17,6 @@ namespace QuickSharp
             strHostName = Dns.GetHostName();
             IPHostEntry ipEntry = Dns.GetHostEntry(strHostName);
             IPAddress[] addr = ipEntry.AddressList;
-            //Initialize the IP address and port manually for now. I replace in this code the IP address text chain by ServerAddress. The program could be configured to know automatically the machine ip address.
             string ipAddress = addr[1].ToString();
             
             int port = 8000;
