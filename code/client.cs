@@ -27,8 +27,8 @@ namespace DefaultNamespace
         Console.Write(s);
         */
         //Initialize the socket
-		Socket ClientServer = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
-        //Connect to the server on listened address and port.I replace in this code the IP address text chain by ServerAddress. The program could be configured to know automatically the machine ip address.
+	Socket ClientServer = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
+        //Connect to the server on listened address and port.
         ClientServer.Connect(ipAddress,8000);
         //Send text. One letter at a time. It would be improved in various ways.
         ClientServer.Send(chaine, SocketFlags.None);
