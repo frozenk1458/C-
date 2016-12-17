@@ -10,7 +10,7 @@ namespace DefaultNamespace
 {
     class MainClass
     {
-        private static void Main()
+        public static void Main(string[] args)
         {
             //Get the current host name from the system
             String strHostName = string.Empty;
