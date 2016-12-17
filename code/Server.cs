@@ -12,8 +12,14 @@ namespace QuickSharp
     {
         private static void Main()
         {
+            //Get the IP address and convert it to string
+            String strHostName = string.Empty;
+            strHostName = Dns.GetHostName();
+            IPHostEntry ipEntry = Dns.GetHostEntry(strHostName);
+            IPAddress[] addr = ipEntry.AddressList;
             //Initialize the IP address and port manually for now. I replace in this code the IP address text chain by ServerAddress. The program could be configured to know automatically the machine ip address.
-            string ipAddress = ServerAddress;
+            string ipAddress = addr[1].ToString();
+            
             int port = 8000;
             //Initialize the buffer for TCP connection
             byte[] bytes = System.Text.Encoding.UTF8.GetBytes(" ");
