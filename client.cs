@@ -51,9 +51,11 @@ namespace DefaultNamespace
                 //Rebuild the text sent
                 c = c + t;
             }
+            //Display the result sent by the server
             Console.WriteLine("Result : {0}",c);
+            //Close the socket connection
+            ClientServer.Close();
           }
-            //ClientServer.Close();
         }
 	 }
     }
