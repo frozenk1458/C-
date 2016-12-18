@@ -60,9 +60,28 @@ namespace DefaultNamespace
                 //Delete space character of c
                 string CSpc = c.Replace(" ","");
                 string Wint = " ";
+                int operat = -6;
                 //At the end of the loop we have the same text without letter.
                 foreach(char u in CSpc)
                 {
+                    //We determine the operation that the user want to do
+                    string lulu = u.ToString();
+                    if(String.Compare(lulu,"+") == 0)
+                    {
+                        operat=1;
+                    }
+                    if(String.Compare(lulu,"-") == 0)
+                    {
+                        operat=2;
+                    }
+                    if(String.Compare(lulu,"*") == 0)
+                    {
+                        operat=3;
+                    }
+                    if(String.Compare(lulu,"/") == 0)
+                    {
+                        operat=4;
+                    }
                     if(!Char.IsLetter(u))
                     {
                         Wint=Wint+u;
@@ -71,12 +90,43 @@ namespace DefaultNamespace
                 //Divide Wint into two pieces with operation character for delimiter.
                 //For now we develop the addition code but we will develop more operations with more modularity.
                 //The modularity will help to have a better vision of the code and simpler code.
-                string[] v = Wint.Split('+');
+                string[] v = { " " };
+                if (operat==1)
+                {
+                    v = Wint.Split('+');
+                }
+                if (operat==2)
+                {
+                    v = Wint.Split('-');
+                }
+                if (operat==3)
+                {
+                    v = Wint.Split('*');
+                }
+                if (operat==4)
+                {
+                    v = Wint.Split('/');
+                }
                 string first = v[0];
                 string second = v[1];
-                Console.WriteLine("{0}, {1}",v[0],v[1]);
                 //Convert text received to int and calculations
-                int res = Convert.ToInt32(first) + Convert.ToInt32(second);
+                int res = 0;
+                if (operat==1)
+                {
+                    res = Convert.ToInt32(first) + Convert.ToInt32(second);
+                }
+                if (operat==2)
+                {
+                    res = Convert.ToInt32(first) - Convert.ToInt32(second);
+                }
+                if (operat==3)
+                {
+                    res = Convert.ToInt32(first) * Convert.ToInt32(second);
+                }
+                if (operat==4)
+                {
+                    res = Convert.ToInt32(first) / Convert.ToInt32(second);
+                }
                 //Prepare the sending of the result. Convert result from int to string to send it
                 string r = res.ToString();
                 //Add the end character for result transmission through the socket
