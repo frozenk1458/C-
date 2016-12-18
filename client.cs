@@ -21,21 +21,24 @@ namespace DefaultNamespace
         IPAddress[] addr = ipEntry.AddressList; 
         string ipAddress = addr[0].ToString();
         
-        //Ask the user to enter a text line
-        string rline;
-        rline = Console.ReadLine();
-        //Put at the end of the line entered by the user ";" which is the caracter end of the buffer
-        rline = rline + ";";
-        byte[] chaine = System.Text.Encoding.UTF8.GetBytes(rline);
+        //Infinite client loop
+        while(true)
+        {
+            //Ask the user to enter a text line
+            string rline;
+            rline = Console.ReadLine();
+            //Put at the end of the line entered by the user ";" which is the caracter end of the buffer
+            rline = rline + ";";
+            byte[] chaine = System.Text.Encoding.UTF8.GetBytes(rline);
         
-        //Initialize the socket
-        Socket ClientServer = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
-        //Connect to the server on listened address and port.
-        ClientServer.Connect(ipAddress,8000);
-        //Send text. One letter at a time. It would be improved in various ways.
-        ClientServer.Send(chaine, SocketFlags.None);
-        
-        ClientServer.Close();
+            //Initialize the socket
+            Socket ClientServer = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
+            //Connect to the server on listened address and port.
+            ClientServer.Connect(ipAddress,8000);
+            //Send text. One letter at a time. It would be improved in various ways.
+            ClientServer.Send(chaine, SocketFlags.None);
+            ClientServer.Close();
+        }
 	 }
     }
 }
