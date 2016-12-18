@@ -12,7 +12,7 @@ namespace DefaultNamespace
     {
         public static string calculation(string s)
         {
-            //Calculation operations.
+                //Calculation operations.
                 //Delete space character of c
                 string CSpc = s.Replace(" ","");
                 string Wint = " ";
