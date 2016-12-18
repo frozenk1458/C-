@@ -56,8 +56,37 @@ namespace DefaultNamespace
                     //Rebuild initial text character by character.
                     c = c + t;
                 }
-                //Write down the complete text received
-                Console.WriteLine(c);
+                //Calculation operations.
+                //Delete space character of c
+                string CSpc = c.Replace(" ","");
+                string Wint = " ";
+                //At the end of the loop we have the same text without letter.
+                foreach(char u in CSpc)
+                {
+                    if(!Char.IsLetter(u))
+                    {
+                        Wint=Wint+u;
+                    }
+                }
+                //Divide Wint into two pieces with operation character for delimiter.
+                //For now we develop the addition code but we will develop more operations with more modularity.
+                //The modularity will help to have a better vision of the code and simpler code.
+                string[] v = Wint.Split('+');
+                string first = v[0];
+                string second = v[1];
+                Console.WriteLine("{0}, {1}",v[0],v[1]);
+                //Convert text received to int and calculations
+                int res = Convert.ToInt32(first) + Convert.ToInt32(second);
+                //Prepare the sending of the result. Convert result from int to string to send it
+                string r = res.ToString();
+                //Add the end character for result transmission through the socket
+                r = r + ";";
+                Console.WriteLine("Sending the result.");
+                //Convert the result to the buffer format
+                byte[] res1 = System.Text.Encoding.UTF8.GetBytes(r);
+                //Send the result
+                list.Send(res1, SocketFlags.None);
+                Console.WriteLine("Result sent");
                 //Close the client connection
                 list.Close();
             }

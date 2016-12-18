@@ -1,0 +1,3 @@
+Commands available for now:
+
+Calc [first number of calculation]+[second number of calculation]

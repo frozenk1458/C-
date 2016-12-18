@@ -20,10 +20,12 @@ namespace DefaultNamespace
         //You can see the interface details with the ipconfig command line in a cmd windows
         IPAddress[] addr = ipEntry.AddressList; 
         string ipAddress = addr[0].ToString();
+        Console.WriteLine("Welcome !!!");
         
         //Infinite client loop
         while(true)
         {
+            Console.WriteLine("\nYou can enter a command line. Please read the command line list file.");
             //Ask the user to enter a text line
             string rline;
             rline = Console.ReadLine();
@@ -37,8 +39,22 @@ namespace DefaultNamespace
             ClientServer.Connect(ipAddress,8000);
             //Send text. One letter at a time. It would be improved in various ways.
             ClientServer.Send(chaine, SocketFlags.None);
-            ClientServer.Close();
+            string c = " ";
+            while(true)
+            {
+                //Reception buffer
+                byte[] bytes = System.Text.Encoding.UTF8.GetBytes(" ");
+                ClientServer.Receive(bytes);
+                string t = System.Text.Encoding.UTF8.GetString(bytes);
+                //; is the end character
+                if(String.Compare(t,";") == 0){ break;}
+                //Rebuild the text sent
+                c = c + t;
+            }
+            Console.WriteLine("Result : {0}",c);
+          }
+            //ClientServer.Close();
         }
 	 }
     }
-}
+
