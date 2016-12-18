@@ -22,18 +22,21 @@ namespace DefaultNamespace
         string ipAddress = addr[0].ToString();
         
         //Initialize the sending buffer
-        byte[] chaine = System.Text.Encoding.UTF8.GetBytes("Testp0");
+        string rline;
+        rline = Console.ReadLine();
+        rline = rline + "0";
+        byte[] chaine = System.Text.Encoding.UTF8.GetBytes(rline);
         /*Testing part
         string s = System.Text.Encoding.UTF8.GetString(chaine);
         Console.Write(s);
         */
         //Initialize the socket
-	Socket ClientServer = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
+        Socket ClientServer = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
         //Connect to the server on listened address and port.
         ClientServer.Connect(ipAddress,8000);
         //Send text. One letter at a time. It would be improved in various ways.
         ClientServer.Send(chaine, SocketFlags.None);
-
+       
         //ClientServer.Send(chaine);
         //ClientServer.Close();
 	 }
