@@ -96,7 +96,7 @@ namespace DefaultNamespace
             String strHostName = string.Empty;
             strHostName = Dns.GetHostName();
             IPHostEntry ipEntry = Dns.GetHostEntry(strHostName);
-            //Get a list of IP addresses [addr variable]. The index 0 of IP addr is the 1st interface and the index 1 is the second interface and so on.
+            //Get a list of IP addresses [addr variable]. The index 0 of addr is the 1st interface and the index 1 is the second interface and so on.
             //You can see the interface details with the ipconfig command line in a cmd window.
             //Select the interface you want to connect through and enter the index matching with this interface in the below line "string ipAddress = addr[index].ToString();"
             IPAddress[] addr = ipEntry.AddressList;
