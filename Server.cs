@@ -11,77 +11,59 @@ namespace DefaultNamespace
     class MainClass
     {
         public static string calculation(string s)
-        {
-                //Calculation operations.
-                //Delete space character of c
+        {//Function to calculate
+                //Delete space character of c and build a string CSpc
                 string CSpc = s.Replace(" ","");
-                string Wint = " ";
-                int operat = -6;
-                //At the end of the loop we have the same text without letter.
+                //Int to determine the operator to do
+                int operat = 0;
+                //Variable to store result
+                int res = 0;
+                //The calculation loop
                 foreach(char u in CSpc)
                 {
-                    //We determine the operation that the user want to do
+                    //We determine the operation that the user want to do and store the type into the variable lulu
                     string lulu = u.ToString();
-                    if(String.Compare(lulu,"+") == 0)
-                    {
-                        operat=1;
+                    //If the current character is not a number it would be an operator character so we analyse it
+                    if(!Char.IsNumber(u))
+                    {   
+                        //If the operation is an addition the operator variable is set to 1
+                        if(String.Compare(lulu,"+") == 0)
+                        {
+                            operat = 1;
+                        }
+                        //If the operation is an subtraction the operator variable is set to 2
+                        if(String.Compare(lulu,"-") == 0)
+                        {
+                            operat = 2;
+                        }
+                        //If the operation is an multiplication the operator variable is set to 3
+                        if(String.Compare(lulu,"*") == 0)
+                        {
+                            operat = 3;
+                        }
+                        //If the operation is an division the operator variable is set to 4
+                        if(String.Compare(lulu,"/") == 0)
+                        {
+                            operat = 4;
+                        }
                     }
-                    if(String.Compare(lulu,"-") == 0)
+                    //If the current character we apply the current operator to calculate the final result or an intermediate result
+                    if(Char.IsNumber(u))
                     {
-                        operat=2;
+                        //ri is the variable to store the numeric value (int format) of current character read
+                        int ri = (int)Char.GetNumericValue(u);
+                        //If the variable operat value is 0, it is because no operator has been detected so we just add to the result
+                        if(operat == 0) res = res + ri;
+                        //We calculate the intermediate result according to the operator found
+                        if(operat == 1)
+                        res = res + ri;
+                        if(operat == 2)
+                        res = res - ri;
+                        if(operat == 3)
+                        res = res * ri;
+                        if(operat == 4)
+                        res = res / ri;
                     }
-                    if(String.Compare(lulu,"*") == 0)
-                    {
-                        operat=3;
-                    }
-                    if(String.Compare(lulu,"/") == 0)
-                    {
-                        operat=4;
-                    }
-                    if(!Char.IsLetter(u))
-                    {
-                        Wint=Wint+u;
-                    }
-                }
-                //Divide Wint into two pieces with operation character for delimiter.
-                //For now we develop the addition code but we will develop more operations with more modularity.
-                //The modularity will help to have a better vision of the code and simpler code.
-                string[] v = { " " };
-                if (operat==1)
-                {
-                    v = Wint.Split('+');
-                }
-                if (operat==2)
-                {
-                    v = Wint.Split('-');
-                }
-                if (operat==3)
-                {
-                    v = Wint.Split('*');
-                }
-                if (operat==4)
-                {
-                    v = Wint.Split('/');
-                }
-                string first = v[0];
-                string second = v[1];
-                //Convert text received to int and calculations
-                int res = 0;
-                if (operat==1)
-                {
-                    res = Convert.ToInt32(first) + Convert.ToInt32(second);
-                }
-                if (operat==2)
-                {
-                    res = Convert.ToInt32(first) - Convert.ToInt32(second);
-                }
-                if (operat==3)
-                {
-                    res = Convert.ToInt32(first) * Convert.ToInt32(second);
-                }
-                if (operat==4)
-                {
-                    res = Convert.ToInt32(first) / Convert.ToInt32(second);
                 }
                 //Prepare the sending of the result. Convert result from int to string to send it
                 string r = res.ToString();
@@ -90,6 +72,7 @@ namespace DefaultNamespace
                 Console.WriteLine("Sending the result.");
                 return r;
         }
+
         public static void Main(string[] args)
         {
             //Get the current host name from the system
@@ -102,7 +85,7 @@ namespace DefaultNamespace
             IPAddress[] addr = ipEntry.AddressList;
             string ipAddress = addr[0].ToString();
             
-            int port = 8000;
+            int port = 3000;
             //Initialize the buffer for TCP connection
             byte[] bytes = System.Text.Encoding.UTF8.GetBytes(" ");
             //Log sentences to write down into the console the connection address and port

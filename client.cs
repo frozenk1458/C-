@@ -36,7 +36,7 @@ namespace DefaultNamespace
             //Initialize the socket
             Socket ClientServer = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
             //Connect to the server on listened address and port.
-            ClientServer.Connect(ipAddress,8000);
+            ClientServer.Connect(ipAddress,3000);
             //Send text. One letter at a time. It would be improved in various ways.
             ClientServer.Send(chaine, SocketFlags.None);
             string c = " ";
