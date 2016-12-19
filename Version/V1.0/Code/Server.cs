@@ -20,7 +20,9 @@ namespace DefaultNamespace
                 //The calculation loop
                 foreach(char u in CSpc)
                 {
+                   //First case : We are in the begin of the expression. We add the first number to the result.
                    if(operateur == 0 && Char.IsNumber(u)) res = res + (int)Char.GetNumericValue(u);
+                   //We calculate with the current element and the previous operator.
                    if(operateur != 0 && Char.IsNumber(u))
                    {
                        if(operateur == 1) res = res + (int)Char.GetNumericValue(u);
@@ -28,6 +30,7 @@ namespace DefaultNamespace
                        if(operateur == 3) res = res * (int)Char.GetNumericValue(u);
                        if(operateur == 4) res = res / (int)Char.GetNumericValue(u);
                    }
+                   //We determine what is the operator to apply in the next cycle
                    if(!Char.IsNumber(u))
                    {
                     string lulu = u.ToString();
