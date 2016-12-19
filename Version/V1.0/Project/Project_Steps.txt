@@ -1,0 +1,11 @@
+A client/server application.
+
+  We will try to follow the below steps:
+  
+    1) Connection between one server and several clients
+    2) Implement the calculation functions
+    3) Add an secure authentication into the application
+          a. A simple authentication with a simple login/password text file
+          b. An authentication with a SGBD
+          c. Attempt to implement a connection via AD or LDAP
+    4) Implement others functions
