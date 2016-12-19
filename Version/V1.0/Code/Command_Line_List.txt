@@ -1,0 +1,4 @@
+Commands available for now:
+
+Any command line with the sub-string : [number][calculation operator][number]
+calculation operators allowed : +, -, *, /.
