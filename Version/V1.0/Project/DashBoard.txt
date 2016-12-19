@@ -1,1 +1,5 @@
+In this document, we write down the project lines.
 
+Currently we have not focused on User Interface. We provided some documents describing briefly how to use the program but the program is not designed yet to support all commands the users can entered. 
+
+Thus the user has to know the code before use the program. This situation is normal because we created the project early. The project is in the starting step. The "user-friendly" step is not started yet.
