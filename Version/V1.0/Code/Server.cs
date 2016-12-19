@@ -38,17 +38,14 @@ namespace DefaultNamespace
                         {
                             operateur = 1;
                         }
-                        //If the operation is an subtraction the operator variable is set to 2
                         if(String.Compare(lulu,"-") == 0)
                         {
                            operateur = 2;
                         }
-                        //If the operation is an multiplication the operator variable is set to 3
                         if(String.Compare(lulu,"*") == 0)
                         {
                             operateur = 3;
                         }
-                        //If the operation is an division the operator variable is set to 4
                         if(String.Compare(lulu,"/") == 0)
                         {
                             operateur = 4;
