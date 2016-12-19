@@ -14,57 +14,45 @@ namespace DefaultNamespace
         {//Function to calculate
                 //Delete space character of c and build a string CSpc
                 string CSpc = s.Replace(" ","");
-                //Int to determine the operator to do
-                int operat = 0;
                 //Variable to store result
                 int res = 0;
+                int operateur = 0; 
                 //The calculation loop
                 foreach(char u in CSpc)
                 {
-                    //We determine the operation that the user want to do and store the type into the variable lulu
+                   if(operateur == 0 && Char.IsNumber(u)) res = res + (int)Char.GetNumericValue(u);
+                   if(operateur != 0 && Char.IsNumber(u))
+                   {
+                       if(operateur == 1) res = res + (int)Char.GetNumericValue(u);
+                       if(operateur == 2) res = res - (int)Char.GetNumericValue(u);
+                       if(operateur == 3) res = res * (int)Char.GetNumericValue(u);
+                       if(operateur == 4) res = res / (int)Char.GetNumericValue(u);
+                   }
+                   if(!Char.IsNumber(u))
+                   {
                     string lulu = u.ToString();
-                    //If the current character is not a number it would be an operator character so we analyse it
-                    if(!Char.IsNumber(u))
-                    {   
-                        //If the operation is an addition the operator variable is set to 1
                         if(String.Compare(lulu,"+") == 0)
                         {
-                            operat = 1;
+                            operateur = 1;
                         }
                         //If the operation is an subtraction the operator variable is set to 2
                         if(String.Compare(lulu,"-") == 0)
                         {
-                            operat = 2;
+                           operateur = 2;
                         }
                         //If the operation is an multiplication the operator variable is set to 3
                         if(String.Compare(lulu,"*") == 0)
                         {
-                            operat = 3;
+                            operateur = 3;
                         }
                         //If the operation is an division the operator variable is set to 4
                         if(String.Compare(lulu,"/") == 0)
                         {
-                            operat = 4;
+                            operateur = 4;
                         }
-                    }
-                    //If the current character we apply the current operator to calculate the final result or an intermediate result
-                    if(Char.IsNumber(u))
-                    {
-                        //ri is the variable to store the numeric value (int format) of current character read
-                        int ri = (int)Char.GetNumericValue(u);
-                        //If the variable operat value is 0, it is because no operator has been detected so we just add to the result
-                        if(operat == 0) res = res + ri;
-                        //We calculate the intermediate result according to the operator found
-                        if(operat == 1)
-                        res = res + ri;
-                        if(operat == 2)
-                        res = res - ri;
-                        if(operat == 3)
-                        res = res * ri;
-                        if(operat == 4)
-                        res = res / ri;
-                    }
+                   }
                 }
+
                 //Prepare the sending of the result. Convert result from int to string to send it
                 string r = res.ToString();
                 //Add the end character for result transmission through the socket
@@ -119,6 +107,7 @@ namespace DefaultNamespace
                     //Rebuild initial text character by character.
                     c = c + t;
                 }
+                c = c + ";";
                 //Call the calculation function. Return a string variable and need a string as a parameter.
                 string rCalc = calculation(c);
                 //Convert the result to the buffer format
