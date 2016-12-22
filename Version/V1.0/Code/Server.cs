@@ -14,45 +14,110 @@ namespace DefaultNamespace
         {//Function to calculate
                 //Delete space character of c and build a string CSpc
                 string CSpc = s.Replace(" ","");
+                CSpc = CSpc +";";
                 //Variable to store result
                 int res = 0;
-                int operateur = 0; 
+                //It is a variable to store the operand and its sign
+                string intermediate = " ";
+                //lulu and operat are test variables to define if the current character of the loop is the operator + or - or * or /
+                string lulu = " ";
+                string operat = " ";
                 //The calculation loop
                 foreach(char u in CSpc)
                 {
-                   //First case : We are in the begin of the expression. We add the first number to the result.
-                   if(operateur == 0 && Char.IsNumber(u)) res = res + (int)Char.GetNumericValue(u);
-                   //We calculate with the current element and the previous operator.
-                   if(operateur != 0 && Char.IsNumber(u))
-                   {
-                       if(operateur == 1) res = res + (int)Char.GetNumericValue(u);
-                       if(operateur == 2) res = res - (int)Char.GetNumericValue(u);
-                       if(operateur == 3) res = res * (int)Char.GetNumericValue(u);
-                       if(operateur == 4) res = res / (int)Char.GetNumericValue(u);
-                   }
-                   //We determine what is the operator to apply in the next cycle
-                   if(!Char.IsNumber(u))
-                   {
-                    string lulu = u.ToString();
+                    //If the current character is a number we had it to intermediate to solve the problem of an operand with several number
+                    if(Char.IsNumber(u))
+                    {
+                        intermediate = intermediate + Char.ToString(u);
+                    }
+                    if(!Char.IsNumber(u))
+                    {
+                        lulu = u.ToString();
+                        //Case of the + operator
                         if(String.Compare(lulu,"+") == 0)
                         {
-                            operateur = 1;
+                            //Case of an addition. Then we set again the variable intermediate to a simple space for the next loop
+                            if(String.Compare(intermediate," ") != 0)
+                            {
+                                res = res + Convert.ToInt32(intermediate);
+                                operat = "+";
+                                intermediate = " ";
+                            }
+                            //If we are in the begin of the calculation, there is nothing store. So the first character if it is not a number is likely an + or - sign
+                            //The case below is the + sign. We build the first operand with the sign met.
+                            if(String.Compare(intermediate," ") == 0)
+                            intermediate = intermediate + "+";
                         }
                         if(String.Compare(lulu,"-") == 0)
                         {
-                           operateur = 2;
+                            //Case of a subtraction. Then we set again the variable intermediate to a simple space for the next loop
+                            if(String.Compare(intermediate," ") != 0)
+                            {
+                                res = res + Convert.ToInt32(intermediate);
+                                 operat = "-";
+                            }
+                            //If we are in the begin of the calculation, there is nothing store. So the first character if it is not a number is likely an + or - sign
+                            //The case below is the - sign. We build the first operand with the sign met.
+                            if(String.Compare(intermediate," ") == 0)
+                            intermediate = intermediate + "-";
                         }
                         if(String.Compare(lulu,"*") == 0)
                         {
-                            operateur = 3;
+                            //Case of a multiplication. Then we set again the variable intermediate to a simple space for the next loop
+                            if(String.Compare(intermediate," ") != 0)
+                            {
+                                res = res + Convert.ToInt32(intermediate);
+                                operat = "*";
+                            }
+                            //Set the variable intermediate set to a simple space for the next loop
+                            intermediate = " ";
                         }
                         if(String.Compare(lulu,"/") == 0)
                         {
-                            operateur = 4;
+                            //Case of a division. Then we set again the variable intermediate a simple space for the next loop
+                            if(String.Compare(intermediate," ") != 0)
+                            {
+                                res = res + Convert.ToInt32(intermediate);
+                                operat = "/";
+                            }
+                            //Set the variable intermediate set to a simple space for the next loop
+                            intermediate = " ";
                         }
-                   }
+                    }
+                    //Case where we arrive at the end of the calculation symbolized by ";"
+                    if(String.Compare(Char.ToString(u),";") == 0)
+                    {
+                        //In this case we take the last operator and we apply it to the last number of the calculation
+                       if(String.Compare(operat,"+") == 0)
+                       {
+                        //Case of an addition   
+                        res = res + Convert.ToInt32(intermediate);
+                        //We exit the loop
+                        break;
+                       }
+                       if(String.Compare(operat,"-") == 0)
+                       {
+                        //Case of a subtraction
+                        res = res - Convert.ToInt32(intermediate);
+                        //We exit the loop
+                       break;
+                        }
+                       if(String.Compare(operat,"*") == 0)
+                       {
+                        //Case of a multiplication
+                        res = res * Convert.ToInt32(intermediate);
+                        //We exit the loop
+                        break;
+                       }
+                       if(String.Compare(operat,"/") == 0)
+                       {
+                        //Case of a division
+                        res = res / Convert.ToInt32(intermediate);
+                        //We exit the loop
+                        break;
+                       }
+                    }
                 }
-
                 //Prepare the sending of the result. Convert result from int to string to send it
                 string r = res.ToString();
                 //Add the end character for result transmission through the socket
