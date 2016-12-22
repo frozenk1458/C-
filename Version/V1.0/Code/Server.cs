@@ -53,7 +53,7 @@ namespace DefaultNamespace
                             //Case of a subtraction. Then we set again the variable intermediate to a simple space for the next loop
                             if(String.Compare(intermediate," ") != 0)
                             {
-                                res = res + Convert.ToInt32(intermediate);
+                                res = res - Convert.ToInt32(intermediate);
                                  operat = "-";
                             }
                             //If we are in the begin of the calculation, there is nothing store. So the first character if it is not a number is likely an + or - sign
@@ -66,7 +66,7 @@ namespace DefaultNamespace
                             //Case of a multiplication. Then we set again the variable intermediate to a simple space for the next loop
                             if(String.Compare(intermediate," ") != 0)
                             {
-                                res = res + Convert.ToInt32(intermediate);
+                                res = res * Convert.ToInt32(intermediate);
                                 operat = "*";
                             }
                             //Set the variable intermediate set to a simple space for the next loop
@@ -77,7 +77,7 @@ namespace DefaultNamespace
                             //Case of a division. Then we set again the variable intermediate a simple space for the next loop
                             if(String.Compare(intermediate," ") != 0)
                             {
-                                res = res + Convert.ToInt32(intermediate);
+                                res = res / Convert.ToInt32(intermediate);
                                 operat = "/";
                             }
                             //Set the variable intermediate set to a simple space for the next loop
