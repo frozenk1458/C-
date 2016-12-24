@@ -2,3 +2,13 @@ Create Socket connection allowing several clients to connect to the server.
 
 A calculator is in construction : The function coded can calculate with only one operator. We have still some difficulties to code a calculator with several operator.
 
+Add modularities in client.cs. Some connexion attemps have been made. The first step is a simple connexion with just the login.
+We try to enter a login and enter in connexion function in the server side but it's not working yet.
+We work on a proper connexion function working as itself.
+Final objectives : On the client side, the user enter a login and a password and send it to the server. The server open a login/password file
+or connect to the DB to compare if it find a matching couple login/password. If a correspondence is found the server return a code 0 to the client otherwise a code 1 is returned.
+Then the client is invited to enter again his/her login/password.
+
+
+The main objective now is : Every job have to be made on the server side and return a code to the client side.
+It is not working yet. Every entry is not properly handled. 
