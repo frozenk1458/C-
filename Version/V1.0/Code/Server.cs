@@ -25,6 +25,7 @@ namespace DefaultNamespace
                 //The calculation loop
                 foreach(char u in CSpc)
                 {
+                    Console.WriteLine("Intermediate :{0}, current : {1}",intermediate,u);
                     //If the current character is a number we had it to intermediate to solve the problem of an operand with several number
                     if(Char.IsNumber(u))
                     {
@@ -55,6 +56,7 @@ namespace DefaultNamespace
                             {
                                 res = res - Convert.ToInt32(intermediate);
                                  operat = "-";
+                                 intermediate = " ";
                             }
                             //If we are in the begin of the calculation, there is nothing store. So the first character if it is not a number is likely an + or - sign
                             //The case below is the - sign. We build the first operand with the sign met.
