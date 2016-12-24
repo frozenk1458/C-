@@ -1,0 +1,4 @@
+Create Socket connection allowing several clients to connect to the server.
+
+A calculator is in construction : The function coded can calculate with only one operator. We have still some difficulties to code a calculator with several operator.
+
