@@ -10,6 +10,19 @@ namespace DefaultNamespace
 {
     class MainClass
     {
+        public static string connexion(string s)
+        {
+            if(String.Compare(s," login;") == 0 )
+            {
+                Console.WriteLine("Login OK");
+                return "Connection OK;";
+            }
+            else
+            {
+                Console.WriteLine("Login NOK");
+                return "Connection NOK;";
+            }
+        }
         public static string calculation(string s)
         {//Function to calculate
                 //Delete space character of c and build a string CSpc
@@ -127,7 +140,6 @@ namespace DefaultNamespace
                 Console.WriteLine("Sending the result.");
                 return r;
         }
-
         public static void Main(string[] args)
         {
             //Get the current host name from the system
@@ -164,7 +176,7 @@ namespace DefaultNamespace
                 string c = " ";
                 while(true)
                 {
-                    //Read the buffer
+                   //Read the buffer
                     list.Receive(bytes);
                     //Text received chararcter by character. In the future we plan to try an exchange of other orders.
                     string t = System.Text.Encoding.UTF8.GetString(bytes);
@@ -175,13 +187,29 @@ namespace DefaultNamespace
                     c = c + t;
                 }
                 c = c + ";";
-                //Call the calculation function. Return a string variable and need a string as a parameter.
-                string rCalc = calculation(c);
-                //Convert the result to the buffer format
-                byte[] res1 = System.Text.Encoding.UTF8.GetBytes(rCalc);
-                //Send the result
-                list.Send(res1, SocketFlags.None);
-                Console.WriteLine("Result sent");
+                Console.Clear();
+                Console.WriteLine(c);
+                if(String.Compare(c," Connect;")==0 || String.Compare(c," login;")==0)
+                {
+                    //Call the calculation function. Return a string variable and need a string as a parameter.
+                    string co = calculation(c);
+                    co = connexion(c);
+                    Console.WriteLine("Cob : {0}",co);
+                    byte[] cob = System.Text.Encoding.UTF8.GetBytes(co);
+                    //Send the result
+                    list.Send(cob, SocketFlags.None);
+                }
+                else if(String.Compare(c," Calc;")!=0 || String.Compare(c," Connect;")!=0)
+                {
+                    //Call the calculation function. Return a string variable and need a string as a parameter.
+                    string rCalc = calculation(c);
+                    //Convert the result to the buffer format
+                    byte[] res1 = System.Text.Encoding.UTF8.GetBytes(rCalc);
+                    Console.WriteLine(rCalc);
+                    //Send the result
+                    list.Send(res1, SocketFlags.None);
+                    Console.WriteLine("Result sent");
+                }
                 //Close the socket connection
                 list.Close();
             }
