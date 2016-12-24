@@ -1,5 +1,5 @@
 Commands available for now:
 
-Any command line with the sub-string : [number][calculation operator][number][calculation operator][number]....[number][calculation operator][number]
+Any command line with the sub-string : [number][calculation operator][number][The case of several different operations is not coded yet]
 calculation operators allowed : +, -, *, /.
 //The negative number case is not done yet and our program works with integer only but we can adapt it to any number type.
