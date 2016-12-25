@@ -11,6 +11,20 @@ namespace DefaultNamespace
 	{
      public static Socket Send(string c, string ipAddress, int connexion)
      {
+            string date = DateTime.Now.ToString("dd/MM/yyyy");
+            Console.WriteLine(date);
+            string d = DateTime.Now.ToString("ddMMyyyy");
+            string filename = "log_client_" + d + ".txt";
+            string path = @".\" + filename;
+            if (!File.Exists(path)) 
+            {
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(path)) 
+                {
+        
+                }	
+            }
+
             string rline = " ";
             int first=0;
             while(String.Compare(rline,"Connect") != 0 && String.Compare(rline,"Calc") != 0)

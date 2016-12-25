@@ -10,7 +10,7 @@ namespace DefaultNamespace
 {
     class MainClass
     {
-        public static void connexion(string c,Socket list)
+        public static void connexion(string c,Socket list,string path, string o)
         {
             int connexion = 0;
             string enterlogin = " ";
@@ -47,18 +47,31 @@ namespace DefaultNamespace
                 string ps = v[1].Replace(";","");
                 if(String.Compare(log,"login")==0 && String.Compare(ps,"pass")==0)
                 {
+                    using (StreamWriter sw = File.AppendText(path)) 
+                    {
+                        sw.Write(o);
+                        sw.WriteLine(" : Log on as " + log);
+                    }
                     connexion = 1;
                     enterlogin = "Connexion OK;";
                     enterloginb = System.Text.Encoding.UTF8.GetBytes(enterlogin);
                     list.Send(enterloginb, SocketFlags.None);
                 }
-                enterlogin = " Connexion NOK;";
-                enterloginb = System.Text.Encoding.UTF8.GetBytes(enterlogin);
-                list.Send(enterloginb, SocketFlags.None);
-                recep =" ";
+                else
+                {
+                    using (StreamWriter sw = File.AppendText(path)) 
+                    {
+                        sw.Write(o);
+                        sw.WriteLine(" : Connexion failed as " + log);
+                    }
+                    enterlogin = " Connexion NOK;";
+                    enterloginb = System.Text.Encoding.UTF8.GetBytes(enterlogin);
+                    list.Send(enterloginb, SocketFlags.None);
+                    recep =" ";
+                }
              }    
         }
-        public static string calculation(string s)
+        public static string calculation(string s,string path, string o)
         {//Function to calculate
                 //Delete space character of c and build a string CSpc
                 string CSpc = s.Replace(" ","");
@@ -73,7 +86,11 @@ namespace DefaultNamespace
                 //The calculation loop
                 foreach(char u in CSpc)
                 {
-                    Console.WriteLine("Intermediate :{0}, current : {1}",intermediate,u);
+                    using (StreamWriter sw = File.AppendText(path)) 
+                    {
+                        sw.Write(o);
+                        sw.WriteLine(" : Intermediate :{0}, current : {1}",intermediate,u);
+                    }
                     //If the current character is a number we had it to intermediate to solve the problem of an operand with several number
                     if(Char.IsNumber(u))
                     {
@@ -172,11 +189,29 @@ namespace DefaultNamespace
                 string r = res.ToString();
                 //Add the end character for result transmission through the socket
                 r = r + ";";
-                Console.WriteLine("Sending the result.");
+                using (StreamWriter sw = File.AppendText(path)) 
+                {
+                    sw.Write(o);
+                    sw.WriteLine(" : Sending the result.");
+                }
                 return r;
         }
         public static void Main(string[] args)
         {
+            string date = DateTime.Now.ToString("dd/MM/yyyy");
+            Console.WriteLine(date);
+            string o = DateTime.Now.ToString("HH:mm:ss tt");
+            string d = DateTime.Now.ToString("ddMMyyyy");
+            string filename = "log_server_" + d + ".txt";
+            string path = @".\" + filename;
+            if (!File.Exists(path)) 
+            {
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(path)) 
+                {
+        
+                }	
+            }
             //Get the current host name from the system
             String strHostName = string.Empty;
             strHostName = Dns.GetHostName();
@@ -223,10 +258,9 @@ namespace DefaultNamespace
                 }
                 c = c + ";";
                 Console.Clear();
-                Console.WriteLine(c);
                 if(String.Compare(c," Connect;")==0)
                 {
-                    connexion(c,list);
+                    connexion(c,list,path,o);
                 }
                 if(String.Compare(c," Calc;")==0)
                 {
@@ -257,13 +291,21 @@ namespace DefaultNamespace
                             break; 
                         }
                         //Call the calculation function. Return a string variable and need a string as a parameter.
-                        string rCalc = calculation(c);
+                        string rCalc = calculation(c,path,o);
                         //Convert the result to the buffer format
                         byte[] res1 = System.Text.Encoding.UTF8.GetBytes(rCalc);
-                        Console.WriteLine(rCalc);
+                        using (StreamWriter sw = File.AppendText(path)) 
+                        {
+                            sw.Write(o);
+                            sw.WriteLine(" : " + rCalc);
+                        }
                         //Send the result
                         list.Send(res1, SocketFlags.None);
-                        Console.WriteLine("Result sent");
+                        using (StreamWriter sw = File.AppendText(path)) 
+                        {
+                            sw.Write(o);
+                            sw.WriteLine(" : Result sent");
+                        }
                     }
                 }
                 //Close the socket connection
