@@ -11,15 +11,18 @@ namespace DefaultNamespace
 	{
      public static Socket Send(string c, string ipAddress)
      {
-         if(String.Compare(c," ") == 0)
-            Console.WriteLine("\nYou can enter a command line. Please read the command line list file.");
-            //Ask the user to enter a text line
-            string rline;
-            rline = Console.ReadLine();
+            string rline = " ";
+            while(String.Compare(rline,"Connect") != 0)
+            {
+                if(String.Compare(c," ") == 0)
+                Console.WriteLine("\nYou can enter a command line. Please read the command line list file.");
+                //Ask the user to enter a text line
+                rline = Console.ReadLine();
+            }
             //Put at the end of the line entered by the user ";" which is the caracter end of the buffer
             rline = rline + ";";
             byte[] chaine = System.Text.Encoding.UTF8.GetBytes(rline);
-        
+            
             //Initialize the socket
             Socket ClientServer = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
             //Connect to the server on listened address and port.
