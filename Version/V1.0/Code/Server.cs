@@ -89,8 +89,6 @@ namespace DefaultNamespace
                 string ps = v[1].Replace(";","");
                 var retVal = new KeyValuePair<string, string>(" ", " ");
                 retVal = ConnectToSql(log,ps);
-                Console.WriteLine(retVal.Key);
-                Console.WriteLine(retVal.Value);
                 if(String.Compare(retVal.Key," ")!=0 && String.Compare(retVal.Value," ")!=0)
                 {
                     using (StreamWriter sw = File.AppendText(path)) 
