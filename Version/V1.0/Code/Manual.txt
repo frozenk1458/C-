@@ -15,3 +15,9 @@ For testing purpose, you can enter the login "login" and the password "pass" to 
 
 
      	      * The line "If you want to stop your calculation, please enter the word \"STOP\". Enter anything else to continue." invite you to decide if you want to continue to calculate or pass to another software's function
+
+
+
+Notes:
+    - We notice that several clients can connect to the server if a client is already connected because the complexity of works done by the server.
+    - We know that we have to create a new server when a client is connected so we always have one server ready to accept a client and start work with it.
