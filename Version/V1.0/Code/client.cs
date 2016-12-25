@@ -129,15 +129,24 @@ namespace DefaultNamespace
             string h = c.Replace(" ","");
             if(String.Compare(h,"ASK") == 0)
             {
-                string ca = " ";
-                Console.WriteLine("\nEnter the calculation you want to do");
-                //Ask the user to enter a text line
-                ca = Console.ReadLine();
-                ca = ca + ";";
-                byte[] chaine = System.Text.Encoding.UTF8.GetBytes(ca);
-                w.Send(chaine, SocketFlags.None);
-                calt = Receive(calt,w);
-                Console.WriteLine("Result : {0}",calt);
+                string stop = " ";
+                while(String.Compare(stop,"STOP;") != 0)
+                {
+                    string ca = " ";
+                    Console.WriteLine("\nEnter the calculation you want to do");
+                    //Ask the user to enter a text line
+                    ca = Console.ReadLine();
+                    ca = ca + ";";
+                    byte[] chaine = System.Text.Encoding.UTF8.GetBytes(ca);
+                    w.Send(chaine, SocketFlags.None);
+                    calt = Receive(calt,w);
+                    Console.WriteLine("Result : {0}",calt);
+                    Console.WriteLine("If you want to stop your calculation, please enter the word \"STOP\". Enter anything else to continue.");
+                    stop = Console.ReadLine();
+                    stop = stop + ";";
+                    byte[] stopp = System.Text.Encoding.UTF8.GetBytes(stop);
+                    w.Send(stopp, SocketFlags.None);
+                }
             }
             if(connexion !=1)
             connexion = Connect(c,w,connexion);

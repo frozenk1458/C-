@@ -230,22 +230,28 @@ namespace DefaultNamespace
                     ask = " ASK;";
                     byte[] askb = System.Text.Encoding.UTF8.GetBytes(ask);
                     list.Send(askb, SocketFlags.None);
-                    //Initialize the reception buffer
-                    c = " ";
                     while(true)
                     {
-                        //Read the buffer
-                        list.Receive(bytes);
-                        //Text received chararcter by character. In the future we plan to try an exchange of other orders.
-                        string t = System.Text.Encoding.UTF8.GetString(bytes);
-                        //We put an character ";" on the client side to define a text end. If we receive a ";" character we stop reading the buffer.
-                        //This part would be improved.
-                        if(String.Compare(t,";") == 0){ break;}
+                        //Initialize the reception buffer
+                        c = " ";
+                        while(true)
+                        {   
+                            //Read the buffer
+                            list.Receive(bytes);
+                            //Text received chararcter by character. In the future we plan to try an exchange of other orders.
+                            string t = System.Text.Encoding.UTF8.GetString(bytes);
+                            //We put an character ";" on the client side to define a text end. If we receive a ";" character we stop reading the buffer.
+                            //This part would be improved.
+                            if(String.Compare(t,";") == 0){ break;}
                             //Rebuild initial text character by character.
                             c = c + t;
-                            Console.WriteLine(c);
                         }
                         c = c + ";";
+                        string checkc = c.Replace(" ","");
+                        if(String.Compare(checkc,"STOP;") == 0)
+                        {
+                            break; 
+                        }
                         //Call the calculation function. Return a string variable and need a string as a parameter.
                         string rCalc = calculation(c);
                         //Convert the result to the buffer format
@@ -254,6 +260,7 @@ namespace DefaultNamespace
                         //Send the result
                         list.Send(res1, SocketFlags.None);
                         Console.WriteLine("Result sent");
+                    }
                 }
                 //Close the socket connection
                 list.Close();
