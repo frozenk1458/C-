@@ -1,5 +1,14 @@
-Commands available for now:
+How to use the software :
 
-Any command line with the sub-string : [number][calculation operator][number][The case of several different operations is not coded yet]
-calculation operators allowed : +, -, *, /.
-//The negative number case is not done yet and our program works with integer only but we can adapt it to any number type.
+1) You have to authenticate yourself into the software (via DB checking).
+For testing purpose, you can enter the login "login" and the password "pass" to enter into the software.
+2) Once authenticate, you can enter the commands listed below : 
+
+    - Calc : It activates the calculation function.
+        Calc function work as follow : 
+              The line "Enter the calculation you want to do" will displayed. 
+              You can now enter any command line with the sub-string : 
+                  [number][calculation operator][number][The case of several different operations is not coded yet]
+                  And we are still detecting some wrong software's behaviours. Please accept our apologies we will try to fix it as soon as possible.
+                  Calculation operators allowed : +, -, *, /.
+//The negative numbers case is not done yet and our program works with integer only but we can adapt it to any number type.
