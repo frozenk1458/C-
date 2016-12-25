@@ -44,7 +44,7 @@ namespace DefaultNamespace
             }
             return c;
      }
-     public static void Display(string c,Socket ClientServer, int connexion)
+     public static void Connect(string c,Socket ClientServer, int connexion)
      {
             if(String.Compare(c," enterlogin") ==0)
             {
@@ -109,7 +109,7 @@ namespace DefaultNamespace
             Socket w = Send(c,ipAddress);
             c = Receive(c,w);
             if(connexion !=1)
-            Display(c,w,connexion);
+            Connect(c,w,connexion);
             //Close the socket connection
             w.Close();
         }
