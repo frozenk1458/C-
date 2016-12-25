@@ -12,3 +12,6 @@ Then the client is invited to enter again his/her login/password.
 
 The main objective now is : Every job have to be made on the server side and return a code to the client side.
 It is not working yet. Every entry is not properly handled. 
+
+1) Connexion with just a login done: If you tap "Connect" as a command your enter in connexion function. 
+  In the client side, the prompt ask to enter a login. For now if you enter the login "login" you are connected. If another login is entered the prompt ask to enter again a login.
