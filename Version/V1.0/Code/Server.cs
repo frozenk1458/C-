@@ -10,18 +10,49 @@ namespace DefaultNamespace
 {
     class MainClass
     {
-        public static string connexion(string s)
+        public static void connexion(string c,Socket list)
         {
-            if(String.Compare(s," login;") == 0 )
-            {
-                Console.WriteLine("Login OK");
-                return "Connection OK;";
-            }
-            else
-            {
-                Console.WriteLine("Login NOK");
-                return "Connection NOK;";
-            }
+            int connexion = 0;
+            string enterlogin = " ";
+            byte[] enterloginb = System.Text.Encoding.UTF8.GetBytes(" ");
+            string recep = " ";
+            int first = 0;
+            byte[] recenterloginb = System.Text.Encoding.UTF8.GetBytes(" ");
+           while(connexion != 1)
+           {
+               if(first == 0)
+               {
+                   enterlogin = "enterlogin;";
+                   enterloginb = System.Text.Encoding.UTF8.GetBytes(enterlogin);
+                   list.Send(enterloginb, SocketFlags.None);
+                   recenterloginb = System.Text.Encoding.UTF8.GetBytes(" ");
+                   first = 1;
+               }
+               while(true)
+               {
+                   //Read the buffer
+                    list.Receive(recenterloginb);
+                    //Text received chararcter by character. In the future we plan to try an exchange of other orders.
+                    string t = System.Text.Encoding.UTF8.GetString(recenterloginb);
+                    //We put an character ";" on the client side to define a text end. If we receive a ";" character we stop reading the buffer.
+                    //This part would be improved.
+                    if(String.Compare(t,";") == 0){ break;}
+                    //Rebuild initial text character by character.
+                    recep = recep + t;
+                }
+                recep = recep + ";";
+                if(String.Compare(recep," login;")==0)
+                {
+                    connexion = 1;
+                    enterlogin = "Connexion OK;";
+                    enterloginb = System.Text.Encoding.UTF8.GetBytes(enterlogin);
+                    list.Send(enterloginb, SocketFlags.None);
+                }
+                enterlogin = " Connexion NOK;";
+                enterloginb = System.Text.Encoding.UTF8.GetBytes(enterlogin);
+                list.Send(enterloginb, SocketFlags.None);
+                recep =" ";
+           }
         }
         public static string calculation(string s)
         {//Function to calculate
@@ -191,13 +222,7 @@ namespace DefaultNamespace
                 Console.WriteLine(c);
                 if(String.Compare(c," Connect;")==0 || String.Compare(c," login;")==0)
                 {
-                    //Call the calculation function. Return a string variable and need a string as a parameter.
-                    string co = calculation(c);
-                    co = connexion(c);
-                    Console.WriteLine("Cob : {0}",co);
-                    byte[] cob = System.Text.Encoding.UTF8.GetBytes(co);
-                    //Send the result
-                    list.Send(cob, SocketFlags.None);
+                    connexion(c,list);
                 }
                 else if(String.Compare(c," Calc;")!=0 || String.Compare(c," Connect;")!=0)
                 {

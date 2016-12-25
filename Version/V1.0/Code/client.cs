@@ -44,15 +44,45 @@ namespace DefaultNamespace
             }
             return c;
      }
-     public static void Display(string c)
+     public static void Display(string c,Socket ClientServer, int connexion)
      {
-            //Display the result sent by the server
-            Console.WriteLine("Result : {0}",c);
-            if(String.Compare(c," Connection NOK") ==0)
+            if(String.Compare(c," enterlogin") ==0)
+            {
+                Console.WriteLine("\nPlease enter your login.");
+                //Ask the user to enter a text line
+                string rline;
+                rline = Console.ReadLine();
+                //Put at the end of the line entered by the user ";" which is the caracter end of the buffer
+                rline = rline + ";";
+                byte[] chaine = System.Text.Encoding.UTF8.GetBytes(rline);
+                ClientServer.Send(chaine, SocketFlags.None);
+                c= " ";
+            }
+            string recep = " ";
+            string CSpc = " ";
+        while(String.Compare(CSpc,"ConnexionOK") !=0)
+         {
+            recep = Receive(c,ClientServer);
+            CSpc = recep.Replace(" ","");
+            if(String.Compare(CSpc,"ConnexionOK") ==0)
             {
                 Console.Clear();
-                System.Environment.Exit(1);
+                Console.WriteLine("Your connexion is secured now!");
+                connexion = 1;
             }
+            if(String.Compare(CSpc,"ConnexionNOK") ==0)
+            {
+                Console.WriteLine("\nPlease enter your login.");
+                //Ask the user to enter a text line
+                string rline;
+                rline = Console.ReadLine();
+                //Put at the end of the line entered by the user ";" which is the caracter end of the buffer
+                rline = rline + ";";
+                byte[] chaine = System.Text.Encoding.UTF8.GetBytes(rline);
+                ClientServer.Send(chaine, SocketFlags.None);
+                c= " ";
+            }
+         }
      }
      
 	 public static void Main(string[] args)
@@ -71,13 +101,15 @@ namespace DefaultNamespace
         Thread.Sleep(1000);
         Console.Clear();
         string c = " ";
+        int connexion = 0;
         //Infinite client loop
         while(true)
         {
             c=" ";
             Socket w = Send(c,ipAddress);
             c = Receive(c,w);
-            Display(c);
+            if(connexion !=1)
+            Display(c,w,connexion);
             //Close the socket connection
             w.Close();
         }
