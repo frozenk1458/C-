@@ -21,7 +21,7 @@ namespace DefaultNamespace
                 if(String.Compare(rline,"Calc") == 0 && connexion !=1)
                 {
                     Console.WriteLine("rline : {0} and connexion : {1}",rline, connexion);
-                    Console.WriteLine("You are not connected so you cannot Calc. Please enter the command Connect first.");
+                    Console.WriteLine("You are not connected so you cannot Calc. Please enter the command \"Connect\" first.");
                     rline = " ";
                 }
             }
