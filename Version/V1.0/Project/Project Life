@@ -16,3 +16,4 @@ It is not working yet. Every entry is not properly handled.
 1) Connexion with just a login done: If you tap "Connect" as a command your enter in connexion function. 
   In the client side, the prompt ask to enter a login. For now if you enter the login "login" you are connected. If another login is entered the prompt ask to enter again a login.
 2) Connexion with login and password works. Follow instructions given.
+3) Log management (one log file is created in client side and one for the server with the current date). Thus if the server and the client will start everyday so a log file with the date will create at the same time of starting.
