@@ -52,7 +52,7 @@ namespace DefaultNamespace
                     rline = Console.ReadLine();
                 }
                 if(String.Compare(rline,"Connect") == 0)break; 
-                if(String.Compare(rline,"Connect") != 0 || String.Compare(rline,"Calc") != 0 && first == 1)
+                if(String.Compare(rline,"Calc") != 0 && first == 1)
                 {
                     Console.Clear();
                     Console.WriteLine("Command Invalid. Please refer to the manual file.");
