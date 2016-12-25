@@ -12,18 +12,25 @@ namespace DefaultNamespace
      public static Socket Send(string c, string ipAddress, int connexion)
      {
             string rline = " ";
+            int first=0;
             while(String.Compare(rline,"Connect") != 0 && String.Compare(rline,"Calc") != 0)
             {
-                if(String.Compare(c," ") == 0)
                 Console.WriteLine("\nYou can enter a command line. Please read the command line list file.");
                 //Ask the user to enter a text line
                 rline = Console.ReadLine();
+                if(String.Compare(rline,"Connect") == 0)break; 
+                if(String.Compare(rline,"Connect") != 0 || String.Compare(rline,"Calc") != 0 && first == 1)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Command Invalid. Please refer to command line list file.");
+                }
                 if(String.Compare(rline,"Calc") == 0 && connexion !=1)
                 {
-                    Console.WriteLine("rline : {0} and connexion : {1}",rline, connexion);
+                    Console.Clear();
                     Console.WriteLine("You are not connected so you cannot Calc. Please enter the command \"Connect\" first.");
                     rline = " ";
                 }
+                first = 1;
             }
             //Put at the end of the line entered by the user ";" which is the caracter end of the buffer
             rline = rline + ";";
@@ -69,8 +76,8 @@ namespace DefaultNamespace
             }
             string recep = " ";
             string CSpc = " ";
-        while(String.Compare(CSpc,"ConnexionOK") !=0)
-         {
+            while(String.Compare(CSpc,"ConnexionOK") !=0)
+            {
             recep = Receive(c,ClientServer);
             CSpc = recep.Replace(" ","");
             if(String.Compare(CSpc,"ConnexionOK") ==0)
@@ -112,12 +119,26 @@ namespace DefaultNamespace
         Console.Clear();
         string c = " ";
         int connexion = 0;
+        string calt = " ";
         //Infinite client loop
         while(true)
         {
             c=" ";
             Socket w = Send(c,ipAddress,connexion);
             c = Receive(c,w);
+            string h = c.Replace(" ","");
+            if(String.Compare(h,"ASK") == 0)
+            {
+                string ca = " ";
+                Console.WriteLine("\nEnter the calculation you want to do");
+                //Ask the user to enter a text line
+                ca = Console.ReadLine();
+                ca = ca + ";";
+                byte[] chaine = System.Text.Encoding.UTF8.GetBytes(ca);
+                w.Send(chaine, SocketFlags.None);
+                calt = Receive(calt,w);
+                Console.WriteLine("Result : {0}",calt);
+            }
             if(connexion !=1)
             connexion = Connect(c,w,connexion);
             //Close the socket connection
