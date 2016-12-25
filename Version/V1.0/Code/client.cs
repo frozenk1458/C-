@@ -37,27 +37,26 @@ namespace DefaultNamespace
             }
 
             string rline = " ";
-            int first=0;
             while(String.Compare(rline,"Connect") != 0 && String.Compare(rline,"Calc") != 0)
             {
                 //We block any unauthenticated user.
                 if(connexion == 0)
                 {
                     rline = "Connect";
+                    break;
                 }
                 else
                 {
                     Console.WriteLine("\nYou can enter a command line. Please read the manual file.");
                     //Ask the user to enter a text line
                     rline = Console.ReadLine();
+                    if(String.Compare(rline,"Calc") == 0)break; 
                 }
-                if(String.Compare(rline,"Connect") == 0)break; 
-                if(String.Compare(rline,"Calc") != 0 && first == 1)
+                if(String.Compare(rline,"Calc") != 0)
                 {
                     Console.Clear();
                     Console.WriteLine("Command Invalid. Please refer to the manual file.");
                 }
-                first = 1;
             }
             //Put at the end of the line entered by the user ";" which is the caracter end of the buffer
             rline = rline + ";";
