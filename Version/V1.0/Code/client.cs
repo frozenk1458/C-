@@ -167,6 +167,7 @@ namespace DefaultNamespace
                 while(String.Compare(stop,"STOP;") != 0)
                 {
                     string ca = " ";
+		    calt = " ";
                     Console.WriteLine("\nEnter the calculation you want to do");
                     //Ask the user to enter a text line
                     ca = Console.ReadLine();
