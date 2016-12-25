@@ -1,4 +1,4 @@
-use SoftCSharp
+use SoftCSharp;
 
 CREATE TABLE users  
 ( 
