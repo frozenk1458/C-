@@ -10,6 +10,27 @@ namespace DefaultNamespace
 {
     class MainClass
     {
+        public static void ConnectToSql()
+        {
+            System.Data.SqlClient.SqlConnection conn = 
+            new System.Data.SqlClient.SqlConnection ();
+            //Replace PC_NAME\\INSTANCE_NAME and DB_NAME by what you are using
+            conn.ConnectionString = "integrated security=SSPI;data source=PC_NAME\\SQLEXPRESS;" + "persist security info=False;initial catalog=DB_NAME";
+            try
+            {
+                conn.Open();
+                Console.WriteLine("You are connected to the DB");
+                // Insert code to process data.
+            }
+            catch (Exception e) 
+            {
+                Console.WriteLine("Failed to connect to data source: {0}", e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
         public static void connexion(string c,Socket list,string path, string o)
         {
             int connexion = 0;
@@ -45,6 +66,7 @@ namespace DefaultNamespace
                 string log = v[0].Replace(" ","");
                 string p = v[1].Replace(" ","");
                 string ps = v[1].Replace(";","");
+                ConnectToSql();
                 if(String.Compare(log,"login")==0 && String.Compare(ps,"pass")==0)
                 {
                     using (StreamWriter sw = File.AppendText(path)) 
