@@ -6,9 +6,12 @@ For testing purpose, you can enter the login "login" and the password "pass" to 
 
     - Calc : It activates the calculation function.
         Calc function work as follow : 
-              The line "Enter the calculation you want to do" will displayed. 
-              You can now enter any command line with the sub-string : 
+              * The line "Enter the calculation you want to do" will displayed. 
+              	You can now enter any command line with the sub-string : 
                   [number][calculation operator][number][The case of several different operations is not coded yet]
                   And we are still detecting some wrong software's behaviours. Please accept our apologies we will try to fix it as soon as possible.
                   Calculation operators allowed : +, -, *, /.
 //The negative numbers case is not done yet and our program works with integer only but we can adapt it to any number type.
+
+
+     	      * The line "If you want to stop your calculation, please enter the word \"STOP\". Enter anything else to continue." invite you to decide if you want to continue to calculate or pass to another software's function

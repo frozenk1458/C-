@@ -47,7 +47,7 @@ namespace DefaultNamespace
                 }
                 else
                 {
-                    Console.WriteLine("\nYou can enter a command line. Please read the command line list file.");
+                    Console.WriteLine("\nYou can enter a command line. Please read the manual file.");
                     //Ask the user to enter a text line
                     rline = Console.ReadLine();
                 }
@@ -55,13 +55,7 @@ namespace DefaultNamespace
                 if(String.Compare(rline,"Connect") != 0 || String.Compare(rline,"Calc") != 0 && first == 1)
                 {
                     Console.Clear();
-                    Console.WriteLine("Command Invalid. Please refer to command line list file.");
-                }
-                if(String.Compare(rline,"Calc") == 0 && connexion !=1)
-                {
-                    Console.Clear();
-                    Console.WriteLine("You are not connected so you cannot Calc. Please enter the command \"Connect\" first.");
-                    rline = " ";
+                    Console.WriteLine("Command Invalid. Please refer to the manual file.");
                 }
                 first = 1;
             }

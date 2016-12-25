@@ -17,7 +17,7 @@ namespace DefaultNamespace
         {
             System.Data.SqlClient.SqlConnection conn = 
             new System.Data.SqlClient.SqlConnection ();
-            conn.ConnectionString  = "integrated security=SSPI;data source=PC_NAME\\SQLEXPRESS;" + "persist security info=False;initial catalog=SoftCSharp";
+            conn.ConnectionString  = "integrated security=SSPI;data source=RODUL-PC\\SQLEXPRESS;" + "persist security info=False;initial catalog=SoftCSharp";
             string strRequete = "SELECT logi,passw FROM users where logi='"+log+"' and passw='"+ps+"'";
             SqlCommand myCommand;
             string login = " ";
@@ -89,6 +89,8 @@ namespace DefaultNamespace
                 string ps = v[1].Replace(";","");
                 var retVal = new KeyValuePair<string, string>(" ", " ");
                 retVal = ConnectToSql(log,ps);
+                Console.WriteLine(retVal.Key);
+                Console.WriteLine(retVal.Value);
                 if(String.Compare(retVal.Key," ")!=0 && String.Compare(retVal.Value," ")!=0)
                 {
                     using (StreamWriter sw = File.AppendText(path)) 
