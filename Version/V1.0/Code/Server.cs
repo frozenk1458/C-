@@ -150,8 +150,8 @@ namespace DefaultNamespace
             //You can see the interface details with the ipconfig command line in a cmd window.
             //Select the interface you want to connect through and enter the index matching with this interface in the below line "string ipAddress = addr[index].ToString();"
             IPAddress[] addr = ipEntry.AddressList;
-            string ipAddress = addr[0].ToString();
-            
+            //string ipAddress = addr[1].ToString();
+            string ipAddress = "127.0.0.1";
             int port = 3000;
             //Initialize the buffer for TCP connection
             byte[] bytes = System.Text.Encoding.UTF8.GetBytes(" ");
