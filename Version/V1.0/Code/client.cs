@@ -40,9 +40,17 @@ namespace DefaultNamespace
             int first=0;
             while(String.Compare(rline,"Connect") != 0 && String.Compare(rline,"Calc") != 0)
             {
-                Console.WriteLine("\nYou can enter a command line. Please read the command line list file.");
-                //Ask the user to enter a text line
-                rline = Console.ReadLine();
+                //We block any unauthenticated user.
+                if(connexion == 0)
+                {
+                    rline = "Connect";
+                }
+                else
+                {
+                    Console.WriteLine("\nYou can enter a command line. Please read the command line list file.");
+                    //Ask the user to enter a text line
+                    rline = Console.ReadLine();
+                }
                 if(String.Compare(rline,"Connect") == 0)break; 
                 if(String.Compare(rline,"Connect") != 0 || String.Compare(rline,"Calc") != 0 && first == 1)
                 {
