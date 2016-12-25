@@ -5,22 +5,42 @@ using System.Collections;
 using System.Threading;
 using System.IO;
 using System.Globalization;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace DefaultNamespace
 {
     class MainClass
     {
-        public static void ConnectToSql()
+        public static KeyValuePair<string, string> ConnectToSql(string log, string ps)
         {
             System.Data.SqlClient.SqlConnection conn = 
             new System.Data.SqlClient.SqlConnection ();
-            //Replace PC_NAME\\INSTANCE_NAME and DB_NAME by what you are using
-            conn.ConnectionString = "integrated security=SSPI;data source=PC_NAME\\SQLEXPRESS;" + "persist security info=False;initial catalog=DB_NAME";
+            conn.ConnectionString  = "integrated security=SSPI;data source=PC_NAME\\SQLEXPRESS;" + "persist security info=False;initial catalog=SoftCSharp";
+            string strRequete = "SELECT logi,passw FROM users where logi='"+log+"' and passw='"+ps+"'";
+            SqlCommand myCommand;
+            string login = " ";
+            string pass = " ";
             try
             {
                 conn.Open();
-                Console.WriteLine("You are connected to the DB");
-                // Insert code to process data.
+                myCommand = new SqlCommand(strRequete,conn);
+                SqlDataReader mySqDataReader = myCommand.ExecuteReader();
+                while (mySqDataReader.Read())
+                {
+                    if(mySqDataReader["logi"]!= System.DBNull.Value && mySqDataReader["passw"]!= System.DBNull.Value)
+                    {
+                        
+                        login = (string)mySqDataReader["logi"];
+                        pass = (string)mySqDataReader["passw"];
+                    }
+                    else
+                    {
+                        login = " ";
+                        pass = " ";
+                    }
+                }   
             }
             catch (Exception e) 
             {
@@ -30,6 +50,7 @@ namespace DefaultNamespace
             {
                 conn.Close();
             }
+            return new KeyValuePair<string, string>(login,pass);
         }
         public static void connexion(string c,Socket list,string path, string o)
         {
@@ -66,13 +87,16 @@ namespace DefaultNamespace
                 string log = v[0].Replace(" ","");
                 string p = v[1].Replace(" ","");
                 string ps = v[1].Replace(";","");
-                ConnectToSql();
-                if(String.Compare(log,"login")==0 && String.Compare(ps,"pass")==0)
+                var retVal = new KeyValuePair<string, string>(" ", " ");
+                retVal = ConnectToSql(log,ps);
+                Console.WriteLine(retVal.Key);
+                Console.WriteLine(retVal.Value);
+                if(String.Compare(retVal.Key," ")!=0 && String.Compare(retVal.Value," ")!=0)
                 {
                     using (StreamWriter sw = File.AppendText(path)) 
                     {
                         sw.Write(o);
-                        sw.WriteLine(" : Log on as " + log);
+                        sw.WriteLine(" : Log on as " + retVal.Key);
                     }
                     connexion = 1;
                     enterlogin = "Connexion OK;";
