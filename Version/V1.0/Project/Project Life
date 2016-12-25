@@ -17,3 +17,4 @@ It is not working yet. Every entry is not properly handled.
   In the client side, the prompt ask to enter a login. For now if you enter the login "login" you are connected. If another login is entered the prompt ask to enter again a login.
 2) Connexion with login and password works. Follow instructions given.
 3) Log management (one log file is created in client side and one for the server with the current date). Thus if the server and the client will start everyday so a log file with the date will create at the same time of starting.
+Each log line will append at the end of server's or client's log file.
