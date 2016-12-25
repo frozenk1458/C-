@@ -15,7 +15,18 @@ namespace DefaultNamespace
             Console.WriteLine(date);
             string d = DateTime.Now.ToString("ddMMyyyy");
             string filename = "log_client_" + d + ".txt";
-            string path = @".\" + filename;
+            string p =@".\log";
+            try 
+            {
+                
+                // Try to create the directory.
+                Directory.CreateDirectory(p);
+            } 
+            catch (Exception e) 
+            {
+                Console.WriteLine("The process failed: {0}", e.ToString());
+            } 
+            string path = @".\log\" + filename;
             if (!File.Exists(path)) 
             {
                 // Create a file to write to.
