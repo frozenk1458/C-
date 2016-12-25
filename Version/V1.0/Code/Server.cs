@@ -220,11 +220,11 @@ namespace DefaultNamespace
                 c = c + ";";
                 Console.Clear();
                 Console.WriteLine(c);
-                if(String.Compare(c," Connect;")==0 || String.Compare(c," login;")==0)
+                if(String.Compare(c," Connect;")==0)
                 {
                     connexion(c,list);
                 }
-                else if(String.Compare(c," Calc;")!=0 || String.Compare(c," Connect;")!=0)
+                if(String.Compare(c," Calc;")==0)
                 {
                     //Call the calculation function. Return a string variable and need a string as a parameter.
                     string rCalc = calculation(c);

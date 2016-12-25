@@ -9,15 +9,21 @@ namespace DefaultNamespace
 {
      class MainClass
 	{
-     public static Socket Send(string c, string ipAddress)
+     public static Socket Send(string c, string ipAddress, int connexion)
      {
             string rline = " ";
-            while(String.Compare(rline,"Connect") != 0)
+            while(String.Compare(rline,"Connect") != 0 && String.Compare(rline,"Calc") != 0)
             {
                 if(String.Compare(c," ") == 0)
                 Console.WriteLine("\nYou can enter a command line. Please read the command line list file.");
                 //Ask the user to enter a text line
                 rline = Console.ReadLine();
+                if(String.Compare(rline,"Calc") == 0 && connexion !=1)
+                {
+                    Console.WriteLine("rline : {0} and connexion : {1}",rline, connexion);
+                    Console.WriteLine("You are not connected so you cannot Calc. Please enter the command Connect first.");
+                    rline = " ";
+                }
             }
             //Put at the end of the line entered by the user ";" which is the caracter end of the buffer
             rline = rline + ";";
@@ -47,7 +53,7 @@ namespace DefaultNamespace
             }
             return c;
      }
-     public static void Connect(string c,Socket ClientServer, int connexion)
+     public static int Connect(string c,Socket ClientServer, int connexion)
      {
             if(String.Compare(c," enterlogin") ==0)
             {
@@ -86,6 +92,7 @@ namespace DefaultNamespace
                 c= " ";
             }
          }
+         return connexion;
      }
      
 	 public static void Main(string[] args)
@@ -109,10 +116,10 @@ namespace DefaultNamespace
         while(true)
         {
             c=" ";
-            Socket w = Send(c,ipAddress);
+            Socket w = Send(c,ipAddress,connexion);
             c = Receive(c,w);
             if(connexion !=1)
-            Connect(c,w,connexion);
+            connexion = Connect(c,w,connexion);
             //Close the socket connection
             w.Close();
         }
