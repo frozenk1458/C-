@@ -41,7 +41,11 @@ namespace DefaultNamespace
                     recep = recep + t;
                 }
                 recep = recep + ";";
-                if(String.Compare(recep," login;")==0)
+                string[] v = recep.Split(':');
+                string log = v[0].Replace(" ","");
+                string p = v[1].Replace(" ","");
+                string ps = v[1].Replace(";","");
+                if(String.Compare(log,"login")==0 && String.Compare(ps,"pass")==0)
                 {
                     connexion = 1;
                     enterlogin = "Connexion OK;";

@@ -66,8 +66,11 @@ namespace DefaultNamespace
             {
                 Console.WriteLine("\nPlease enter your login.");
                 //Ask the user to enter a text line
-                string rline;
+                string rline = " ";
                 rline = Console.ReadLine();
+                rline = rline + ":";
+                Console.WriteLine("\nPlease enter your password.");
+                rline = rline + Console.ReadLine();
                 //Put at the end of the line entered by the user ";" which is the caracter end of the buffer
                 rline = rline + ";";
                 byte[] chaine = System.Text.Encoding.UTF8.GetBytes(rline);
@@ -92,8 +95,11 @@ namespace DefaultNamespace
                 Console.WriteLine("You entered a wrong login or password. Please try again");
                 Console.WriteLine("\nPlease enter your login.");
                 //Ask the user to enter a text line
-                string rline;
+                string rline = " ";
                 rline = Console.ReadLine();
+                rline = rline + ":";
+                Console.WriteLine("\nPlease enter your password.");
+                rline = rline + Console.ReadLine();
                 //Put at the end of the line entered by the user ";" which is the caracter end of the buffer
                 rline = rline + ";";
                 byte[] chaine = System.Text.Encoding.UTF8.GetBytes(rline);
