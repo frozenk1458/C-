@@ -88,6 +88,8 @@ namespace DefaultNamespace
             }
             if(String.Compare(CSpc,"ConnexionNOK") ==0)
             {
+                Console.Clear();
+                Console.WriteLine("You entered a wrong login or password. Please try again");
                 Console.WriteLine("\nPlease enter your login.");
                 //Ask the user to enter a text line
                 string rline;
